@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ShoppingCart, Plus, Minus, X, Utensils, ChevronLeft } from 'lucide-react';
+import { ShoppingCart, Plus, Minus, X, Info, Utensils, ChevronLeft } from 'lucide-react';
 
 // --- MOCK DATA ---
-// Mirrors the data structure from Menu.js / menu-manager-app.jsx
+// This perfectly mirrors the data structure from menu-manager-app.jsx
 const mockMenuData = {
   name: "Lumina Botanica",
   description: "<p>Experience a fusion of <strong>global flavors</strong> in a radiant, nature-inspired atmosphere.</p>",
@@ -23,7 +23,7 @@ const mockMenuData = {
           id: "item_101",
           name: "Midnight Orchid",
           description: "Butterfly pea infused gin, elderflower, fresh lemon, and a touch of magic.",
-          price: 18,
+          price: 18000,
           image: "https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=2866&auto=format&fit=crop",
           category: "drink",
           available: true
@@ -32,7 +32,7 @@ const mockMenuData = {
           id: "item_102",
           name: "Smoked Ember Old Fashioned",
           description: "Aged bourbon, maple cedar smoke, angostura, and brandied cherry.",
-          price: 22,
+          price: 22000,
           image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2940&auto=format&fit=crop",
           category: "drink",
           available: true
@@ -41,7 +41,7 @@ const mockMenuData = {
           id: "item_103",
           name: "Spiced Hibiscus Margarita",
           description: "Tequila blanco, house-made hibiscus syrup, fresh lime, chili salt rim.",
-          price: 16,
+          price: 16000,
           image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=2000&auto=format&fit=crop",
           category: "drink",
           available: true
@@ -50,7 +50,7 @@ const mockMenuData = {
           id: "item_104",
           name: "Golden Hour Spritz",
           description: "Prosecco, bitter orange liqueur, sparkling water, thyme sprig.",
-          price: 14,
+          price: 14000,
           image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=2000&auto=format&fit=crop",
           category: "drink",
           available: true
@@ -66,7 +66,7 @@ const mockMenuData = {
           id: "item_201",
           name: "Truffle Burrata Toast",
           description: "Creamy burrata, shaved black truffle, hot honey, sourdough.",
-          price: 24,
+          price: 24000,
           image: "https://images.unsplash.com/photo-1608897013039-887f21d8c804?q=80&w=2792&auto=format&fit=crop",
           category: "food",
           available: true
@@ -75,7 +75,7 @@ const mockMenuData = {
           id: "item_202",
           name: "Seared Hokkaido Scallops",
           description: "Cauliflower purée, brown butter caper sauce, micro-greens.",
-          price: 36,
+          price: 36000,
           image: "https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?q=80&w=2940&auto=format&fit=crop",
           category: "food",
           available: true
@@ -84,7 +84,7 @@ const mockMenuData = {
           id: "item_203",
           name: "Wagyu Beef Sliders",
           description: "Brioche buns, caramelized onion jam, gruyere cheese.",
-          price: 28,
+          price: 28000,
           image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=2799&auto=format&fit=crop",
           category: "food",
           available: false // Demonstrating sold-out state
@@ -93,7 +93,7 @@ const mockMenuData = {
           id: "item_204",
           name: "Crispy Maitake Mushrooms",
           description: "Tempura fried local maitake, yuzu kosho aioli, togarashi.",
-          price: 18,
+          price: 18000,
           image: "https://images.unsplash.com/photo-1564834744159-ff0ea41ba4b9?q=80&w=2000&auto=format&fit=crop",
           category: "food",
           available: true
@@ -102,7 +102,7 @@ const mockMenuData = {
           id: "item_205",
           name: "Miso Glazed Black Cod",
           description: "Sustainably caught cod, sweet miso marinade, pickled ginger shoot.",
-          price: 38,
+          price: 38000,
           image: "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?q=80&w=2000&auto=format&fit=crop",
           category: "food",
           available: true
@@ -118,7 +118,7 @@ const mockMenuData = {
           id: "item_301",
           name: "Matcha Lava Cake",
           description: "Warm matcha white chocolate center, black sesame ice cream.",
-          price: 16,
+          price: 16000,
           image: "https://images.unsplash.com/photo-1515037893149-de7f840978e2?q=80&w=2948&auto=format&fit=crop",
           category: "food",
           available: true
@@ -127,7 +127,7 @@ const mockMenuData = {
           id: "item_302",
           name: "Yuzu Meringue Tart",
           description: "Crisp butter shell, tart yuzu curd, toasted marshmallow meringue.",
-          price: 14,
+          price: 14000,
           image: "https://images.unsplash.com/photo-1501432781167-c0ccfd492297?q=80&w=2000&auto=format&fit=crop",
           category: "food",
           available: true
@@ -138,7 +138,7 @@ const mockMenuData = {
 };
 
 // --- HELPER UTILS ---
-const formatPrice = (num) => `$${Number(num).toFixed(2)}`;
+const formatPrice = (num) => `TSH ${Number(num).toLocaleString()}`;
 const hexToRgba = (hex, opacity) => {
   let c;
   if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
